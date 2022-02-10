@@ -190,7 +190,31 @@ def getNameEmojiMessage():
 
 
 def getCarouselMessage(data):
-    message = dict()
+    message = {
+      "type": "template",
+      "altText": "this is a image carousel template",
+      "template": {
+          "type": "image_carousel",
+          "columns": [
+              {
+                "imageUrl": F"{end_point}/static/taipei_101.jpeg,
+                "action": {
+                  "type": "postback",
+                  "label": "台北101",
+                  "data": "action=buy&itemid=111"
+                }
+              },
+              {
+                "imageUrl": F"{end_point}/static/taipei_1.jpeg,
+                "action": {
+                  "type": "postback",
+                  "label": "台北101",
+                  "data": "action=buy&itemid=111"
+                }
+              }
+          ]
+      }
+    }
     return message
 
 
