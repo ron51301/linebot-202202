@@ -76,7 +76,7 @@ def index():
                                             }
                                           ]
                 elif text == "打卡":
-                        daka()
+
 
 
                     
