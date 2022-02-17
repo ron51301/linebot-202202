@@ -45,7 +45,8 @@ def index():
                 text = events[0]["message"]["text"]
 
                 if text == "一般使用者":
-                    payload["messages"] = [{
+                    payload["messages"] = [
+                                            {
                                             "type":"text",
                                             "text":"Hello, user"
                                             },
@@ -59,14 +60,17 @@ def index():
                                                     "actions": [
                                                         {
                                                             "type": "message",
-                                                            "label": "CFI-102",
-                                                            "text": "CFI-102"
+                                                            "label": "cfi-102",
+                                                            "text": "cfi-102"
                                                         },
                                                         {
                                                             "type": "message",
-                                                            "label": "CFI-1110",
-                                                            "text": "CFI-1110"
+                                                            "label": "cfi-103",
+                                                            "text": "cfi-103"
                                                         }
+                                                    ]
+                                                }
+                                            }
                                           ]
                 elif text == "中壢":
 
