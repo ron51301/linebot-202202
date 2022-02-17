@@ -8,9 +8,10 @@ import json
 import configparser
 import os
 from urllib import parse
+
 from datetime import datetime
 import pymysql
-import pymysql.cursors
+
 
 app = Flask(__name__, static_url_path='/static')
 UPLOAD_FOLDER = 'static'
@@ -77,7 +78,7 @@ def index():
                                             }
                                           ]
                 elif text == "打卡":
-                    daka()
+                        daka()
 
 
                     
@@ -142,8 +143,7 @@ def daka():
                                  user="b809ff374c792c",
                                  password="bbc8de98",
                                  database="heroku_9a97caadd884ab8",
-                                 charset='utf8mb4',
-                                 cursorclass=pymysql.cursors.DictCursor)
+                                 charset='utf8mb4')
 
     cursor = connection.cursor()
     create_date = datetime.today().strftime('%Y-%m-%d')  # 得到當前日期
