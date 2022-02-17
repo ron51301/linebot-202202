@@ -9,8 +9,6 @@ import configparser
 import os
 from urllib import parse
 
-from datetime import datetime
-import pymysql
 
 
 app = Flask(__name__, static_url_path='/static')
