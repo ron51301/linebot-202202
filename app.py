@@ -50,9 +50,23 @@ def index():
                                             "text":"Hello, user"
                                             },
                                             {
-                                                "type": "text",
-                                                "text": "請選擇地點"
-                                            }
+                                                "type": "template",
+                                                "altText": "This is a buttons template",
+                                                "template": {
+                                                    "type": "buttons",
+                                                    "title": "Menu",
+                                                    "text": "Please select",
+                                                    "actions": [
+                                                        {
+                                                            "type": "message",
+                                                            "label": "CFI-102",
+                                                            "text": "CFI-102"
+                                                        },
+                                                        {
+                                                            "type": "message",
+                                                            "label": "CFI-1110",
+                                                            "text": "CFI-1110"
+                                                        }
                                           ]
                 elif text == "中壢":
 
