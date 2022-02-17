@@ -140,8 +140,7 @@ def daka():
     connection = pymysql.connect(host="us-cdbr-east-05.cleardb.net",
                                  user="b809ff374c792c",
                                  password="bbc8de98",
-                                 database="heroku_9a97caadd884ab8",
-                                 charset='utf8mb4')
+                                 database="heroku_9a97caadd884ab8")
 
     cursor = connection.cursor()
     create_date = datetime.today().strftime('%Y-%m-%d')  # 得到當前日期
