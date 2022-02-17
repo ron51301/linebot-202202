@@ -8,6 +8,10 @@ import json
 import configparser
 import os
 from urllib import parse
+from datetime import datetime
+import pymysql
+import pymysql.cursors
+
 app = Flask(__name__, static_url_path='/static')
 UPLOAD_FOLDER = 'static'
 ALLOWED_EXTENSIONS = set(['pdf', 'png', 'jpg', 'jpeg', 'gif'])
@@ -72,7 +76,8 @@ def index():
                                                 }
                                             }
                                           ]
-                elif text == "中壢":
+                elif text == "打卡":
+                    daka()
 
 
                     
@@ -132,7 +137,24 @@ def getTotalSentMessageCount():
     response = requests.get("https://api.line.me/v2/bot/message/quota/consumption",headers=HEADER)
     return response.json()["totalUsage"]
 
+def daka():
+    connection = pymysql.connect(host="us-cdbr-east-05.cleardb.net",
+                                 user="b809ff374c792c",
+                                 password="bbc8de98",
+                                 database="heroku_9a97caadd884ab8",
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor)
 
+    cursor = connection.cursor()
+    create_date = datetime.today().strftime('%Y-%m-%d')  # 得到當前日期
+    create_time = datetime.today().strftime('%H:%M:%S')  # 得到當前時間
+    # 在mysql中，時間資料也是字串，故create_date和create_time還要有一組雙引號
+    sql = f"insert into wlog (EMPNO , CREATE_DATE, CREATE_TIME) values ('{168}', '{create_date}', '{create_time}')"
+    cursor.execute(sql)
+
+    connection.commit()
+    cursor.close()
+    connection.close()
 
 if __name__ == "__main__":
     app.debug = True
