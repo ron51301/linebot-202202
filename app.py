@@ -175,8 +175,7 @@ def data():
     connection = pymysql.connect(host="us-cdbr-east-05.cleardb.net",
                                  user="b809ff374c792c",
                                  password="bbc8de98",
-                                 database="heroku_9a97caadd884ab8",
-                                 charset='utf8mb4')
+                                 database="heroku_9a97caadd884ab8")
 
     cursor = connection.cursor()
     # 在mysql中，時間資料也是字串，故create_date和create_time還要有一組雙引號
