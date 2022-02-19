@@ -72,6 +72,11 @@ def index():
                                                             "type": "message",
                                                             "label": "cfi-103",
                                                             "text": "cfi-103"
+                                                        },
+                                                        {
+                                                            "type": "message",
+                                                            "label": "cfi-888",
+                                                            "text": "cfi-888"
                                                         }
                                                     ]
                                                 }
@@ -80,10 +85,20 @@ def index():
                 elif text == "打卡":
                     daka()
 
-
-
-                    
                     payload["messages"] = [getPlayStickerMessage()]
+                elif text == "cfi-102":
+                    a = data()[0]
+                    b = data()[1]
+                    c = data()[2]
+                    payload["messages"] = [
+                        {
+                            "type": "text",
+                            "text": f"""您好:
+                                        {a}
+                                        在{b}
+                                        人流量為{c}"""
+                        }
+
 
                 else:
                     payload["messages"] = [
@@ -155,6 +170,30 @@ def daka():
     connection.commit()
     cursor.close()
     connection.close()
+
+def data():
+    connection = pymysql.connect(host="us-cdbr-east-05.cleardb.net",
+                                 user="b809ff374c792c",
+                                 password="bbc8de98",
+                                 database="heroku_9a97caadd884ab8",
+                                 charset='utf8mb4')
+
+    cursor = connection.cursor()
+    # 在mysql中，時間資料也是字串，故create_date和create_time還要有一組雙引號
+    sql = f"""select RDATE, NOWIN, LOCATION
+            from slog  join aiot on slog.AIOTNO = aiot.AIOTNO
+            where AIOTNO = cfi-102
+            order by RDATE desc
+            limit 1;"""
+    cursor.execute(sql)
+    result = cursor.fetchone()
+    # result["RDATE"] = str(result["RDATE"])
+
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return result
+
 
 if __name__ == "__main__":
     app.debug = True
