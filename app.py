@@ -93,9 +93,11 @@ def index():
                     payload["messages"] = [
                         {
                             "type": "text",
-                            "text": f"您好:{a} 在{b} 人流量為{c}"
+                            "text": f"您好:{a} "
+                                    f"在{b} "
+                                    f"人流量為{c}"
                         }
-
+                    ]
 
                 else:
                     payload["messages"] = [
