@@ -94,8 +94,8 @@ def index():
                         {
                             "type": "text",
                             "text": f"您好:{a} "
-                                    f"在{b} "
-                                    f"人流量為{c}"
+                                    f"在{c} "
+                                    f"人流量為{b}"
                         }
                     ]
 
@@ -179,10 +179,10 @@ def data():
     cursor = connection.cursor()
     # 在mysql中，時間資料也是字串，故create_date和create_time還要有一組雙引號
     sql = f"""select RDATE, NOWIN, LOCATION
-            from slog s join aiot a on s.AIOTNO = a.AIOTNO
-            where s.AIOTNO = cfi-102
-            order by RDATE desc
-            limit 1;"""
+                from slog s  join aiot a on s.AIOTNO = a.AIOTNO
+                where s.AIOTNO = 'cfi-102'
+                order by RDATE desc
+                limit 1"""
     cursor.execute(sql)
     result = cursor.fetchone()
     # result["RDATE"] = str(result["RDATE"])
