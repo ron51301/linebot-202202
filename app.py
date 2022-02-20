@@ -9,7 +9,7 @@ import configparser
 import os
 from urllib import parse
 
-import time
+from datetime import datetime
 import pymysql
 
 
@@ -160,8 +160,8 @@ def daka():
                                  database="heroku_9a97caadd884ab8")
 
     cursor = connection.cursor()
-    create_date = time.strftime('%Y-%m-%d')  # 得到當前日期
-    create_time = time.strftime('%H:%M:%S')  # 得到當前時間
+    create_date = datetime.today().strftime('%Y-%m-%d')  # 得到當前日期
+    create_time = datetime.today().strftime('%H:%M:%S')  # 得到當前時間
     # 在mysql中，時間資料也是字串，故create_date和create_time還要有一組雙引號
     sql = f"insert into wlog (EMPNO , CREATE_DATE, CREATE_TIME) values ('{216}', '{create_date}', '{create_time}')"
     cursor.execute(sql)
