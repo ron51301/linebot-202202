@@ -137,27 +137,7 @@ def index():
     return 'OK'
 
 
-def getNameEmojiMessage():
-    lookUpStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-    productId = "5ac21a8c040ab15980c9b43f"
-    name = "Jason"
-    message = dict()
-    message["type"] = "text"
-    message["text"] = "".join("$" for r in range(len(name)))
-    emojis_list = list()
-    for i, nChar in enumerate(name):
-        emojis_list.append(
-            {
-                "index": i,
-                "productId": productId,
-                "emojiId": f"{lookUpStr.index(nChar) + 1 :03}"
-            }
-        )
-    message["emojis"] = emojis_list
-    return message
-
-
-def getPlayStickerMessage():
+def getPlayStickerMessage(): #標示打卡成功用的
     message = dict()
     message["type"] = "sticker"
     message["packageId"] = "6325"
@@ -175,11 +155,7 @@ def pushMessage(payload):
     return 'OK'
 
 
-def getTotalSentMessageCount():
-    response = requests.get("https://api.line.me/v2/bot/message/quota/consumption",headers=HEADER)
-    return response.json()["totalUsage"]
-
-def daka():
+def daka():  # 打卡功能
     connection = pymysql.connect(host="us-cdbr-east-05.cleardb.net",
                                  user="b809ff374c792c",
                                  password="bbc8de98",
@@ -197,7 +173,7 @@ def daka():
     cursor.close()
     connection.close()
 
-def data(x):
+def data(x):  # 人流查詢功能
     connection = pymysql.connect(host="us-cdbr-east-05.cleardb.net",
                                  user="b809ff374c792c",
                                  password="bbc8de98",
