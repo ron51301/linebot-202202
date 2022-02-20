@@ -139,7 +139,7 @@ def index():
 
 @app.route("/", methods=['POST'])
 def rich_menu():
-    data='{
+    data={
             "size": {
               "width": 2500,
               "height": 1686
@@ -161,7 +161,7 @@ def rich_menu():
                 }
               }
            ]
-        }'
+        }
     response = requests.post("https://api.line.me/v2/bot/richmenu",headers=HEADER,data=json.dumps(data))
     return 'OK'
 
