@@ -137,6 +137,34 @@ def index():
     return 'OK'
 
 
+@app.route("/", methods=['POST'])
+def rich_menu():
+    data='{
+            "size": {
+              "width": 2500,
+              "height": 1686
+            },
+            "selected": true,
+            "name": "Nice richmenu",
+            "chatBarText": "Tap here",
+            "areas": [
+              {
+                "bounds": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 2500,
+                  "height": 1686
+                },
+                "action": {
+                  "type": "message",
+                  "data": "一般使用者"
+                }
+              }
+           ]
+        }'
+    response = requests.post("https://api.line.me/v2/bot/richmenu",headers=HEADER,data=json.dumps(data))
+    return 'OK'
+
 def getPlayStickerMessage(): #標示打卡成功用的
     message = dict()
     message["type"] = "sticker"
