@@ -83,9 +83,10 @@ def index():
                                             }
                                           ]
                 elif text == "打卡":
-                    payload["messages"] = [daka()]
+                    payload["messages"] = [daka(),
+                                           getPlayStickerMessage()]
 
-                    payload["messages"] = [getPlayStickerMessage()]
+                    
                 elif text == "cfi-102":
                     x = 'cfi-102'
                     a = data(x)[0]
