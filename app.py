@@ -83,7 +83,7 @@ def index():
                                             }
                                           ]
                 elif text == "打卡":
-                    daka()
+                    payload["messages"] = [daka()]
 
                     payload["messages"] = [getPlayStickerMessage()]
                 elif text == "cfi-102":
@@ -183,8 +183,8 @@ def daka():
     connection = pymysql.connect(host="us-cdbr-east-05.cleardb.net",
                                  user="b809ff374c792c",
                                  password="bbc8de98",
-                                 database="heroku_9a97caadd884ab8",
-                                 cursorclass=pymysql.cursors.DictCursor)
+                                 database="heroku_9a97caadd884ab8")
+
 
     cursor = connection.cursor()
     create_date = datetime.today().strftime('%Y-%m-%d')  # 得到當前日期
