@@ -87,9 +87,10 @@ def index():
 
                     payload["messages"] = [getPlayStickerMessage()]
                 elif text == "cfi-102":
-                    a = data()[0]
-                    b = data()[1]
-                    c = data()[2]
+                    x = 'cfi-102'
+                    a = data(x)[0]
+                    b = data(x)[1]
+                    c = data(x)[2]
                     payload["messages"] = [
                         {
                             "type": "text",
@@ -98,7 +99,32 @@ def index():
                                     f"人流量為{b}"
                         }
                     ]
-
+                elif text == "cfi-103":
+                    x = 'cfi-103'
+                    a = data(x)[0]
+                    b = data(x)[1]
+                    c = data(x)[2]
+                    payload["messages"] = [
+                        {
+                            "type": "text",
+                            "text": f"您好:{a} "
+                                    f"在{c} "
+                                    f"人流量為{b}"
+                        }
+                    ]
+                elif text == "cfi-888":
+                    x = 'cfi-888'
+                    a = data(x)[0]
+                    b = data(x)[1]
+                    c = data(x)[2]
+                    payload["messages"] = [
+                        {
+                            "type": "text",
+                            "text": f"您好:{a} "
+                                    f"在{c} "
+                                    f"人流量為{b}"
+                        }
+                    ]
                 else:
                     payload["messages"] = [
                             {
@@ -170,7 +196,7 @@ def daka():
     cursor.close()
     connection.close()
 
-def data():
+def data(x):
     connection = pymysql.connect(host="us-cdbr-east-05.cleardb.net",
                                  user="b809ff374c792c",
                                  password="bbc8de98",
@@ -178,19 +204,41 @@ def data():
 
     cursor = connection.cursor()
     # 在mysql中，時間資料也是字串，故create_date和create_time還要有一組雙引號
-    sql = f"""select RDATE, NOWIN, LOCATION
-                from slog s  join aiot a on s.AIOTNO = a.AIOTNO
-                where s.AIOTNO = 'cfi-102'
-                order by RDATE desc
-                limit 1"""
-    cursor.execute(sql)
-    result = cursor.fetchone()
+    a = 'cfi-102'
+    b = 'cfi-103'
+    c = 'cfi-888'
+    if x == a:
+        sql = f"""select RDATE, NOWIN, LOCATION
+                    from slog s  join aiot a on s.AIOTNO = a.AIOTNO
+                    where s.AIOTNO = 'cfi-102'
+                    order by RDATE desc
+                    limit 1"""
+        cursor.execute(sql)
+        result = cursor.fetchone()
+        return result
+    elif x == b:
+        sql = f"""select RDATE, NOWIN, LOCATION
+                    from slog s  join aiot a on s.AIOTNO = a.AIOTNO
+                    where s.AIOTNO = 'cfi-103'
+                    order by RDATE desc
+                    limit 1"""
+        cursor.execute(sql)
+        result = cursor.fetchone()
+        return result
+    elif x == c:
+        sql = f"""select RDATE, NOWIN, LOCATION
+                    from slog s  join aiot a on s.AIOTNO = a.AIOTNO
+                    where s.AIOTNO = 'cfi-888'
+                    order by RDATE desc
+                    limit 1"""
+        cursor.execute(sql)
+        result = cursor.fetchone()
+        return result
     # result["RDATE"] = str(result["RDATE"])
 
     connection.commit()
     cursor.close()
     connection.close()
-    return result
 
 
 if __name__ == "__main__":
