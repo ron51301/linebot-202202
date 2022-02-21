@@ -109,6 +109,7 @@ def index():
                                 ]
                             }
                         }
+                    ]
 
                 elif text == "cfi-102":
                     x = 'cfi-102'
