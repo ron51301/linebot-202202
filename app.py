@@ -83,7 +83,7 @@ def index():
                                             }
                                           ]
                 elif text == "打卡":
-                    a = events[0]['source']['userid']
+                    a = events[0]['source']['userId']
                     payload["messages"] = [
                         {
                             "type": "text",
