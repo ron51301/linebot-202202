@@ -107,7 +107,7 @@ def index():
                         }
                     ]
 
-                    x = events[0]['params']['datetime']
+                    # x = events[0]['params']['datetime']
                 elif text == "cfi-102":
                     x = 'cfi-102'
                     a = data(x)[0]
