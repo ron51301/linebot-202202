@@ -83,6 +83,11 @@ def index():
                                             }
                                           ]
                 elif text == "打卡":
+                    payload["messages"] = [
+                        {
+                            "type": "text",
+                            "text": "Hello, user"
+                        }
                     # daka()
                     # payload["messages"] = [getPlayStickerMessage()]
 
