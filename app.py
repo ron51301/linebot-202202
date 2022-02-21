@@ -89,22 +89,18 @@ def index():
 
                 elif text == "打卡查詢":
                     payload["messages"] = [
-                        {
+                            message = {
                             "type": "template",
-                            "altText": "This is a buttons template",
+                            "altText": "this is a template",
                             "template": {
                                 "type": "buttons",
-                                "title": "打卡查詢",
-                                "text": "Please select time and date",
+                                "text": "請選擇查詢時間",
                                 "actions": [
                                     {
                                         "type": "datetimepicker",
                                         "label": "Select date",
                                         "data": "storeId=12345",
-                                        "mode": "datetime",
-                                        "initial": "2022-2-20t00:00",
-                                        "max": "2032-01-24t23:59",
-                                        "min": "2022-2-20t00:00"
+                                        "mode": "datetime"
                                     }
                                 ]
                             }
