@@ -83,14 +83,9 @@ def index():
                                             }
                                           ]
                 elif text == "打卡":
-                    a = events[0]['source']['userId']
-                    payload["messages"] = [
-                        {
-                            "type": "text",
-                            "text": f"Hello, {a}"
-                        }]
-                    # daka()
-                    # payload["messages"] = [getPlayStickerMessage()]
+                    x = events[0]['source']['userId']
+                    daka(x)
+                    payload["messages"] = [getPlayStickerMessage()]
 
                 elif text == "cfi-102":
                     x = 'cfi-102'
@@ -160,7 +155,7 @@ def pushMessage(payload):
     return 'OK'
 
 
-def daka():  # 打卡功能
+def daka(x):  # 打卡功能
     connection = pymysql.connect(host="us-cdbr-east-05.cleardb.net",
                                  user="b809ff374c792c",
                                  password="bbc8de98",
@@ -171,7 +166,7 @@ def daka():  # 打卡功能
     create_date = datetime.today().strftime('%Y-%m-%d')  # 得到當前日期
     create_time = datetime.today().strftime('%H:%M:%S')  # 得到當前時間
     # 在mysql中，時間資料也是字串，故create_date和create_time還要有一組雙引號
-    sql = f"insert into wlog (EMPNO , CREATE_DATE, CREATE_TIME) values ('{244}', '{create_date}', '{create_time}')"
+    sql = f"insert into wlog (EMPNO , CREATE_DATE, CREATE_TIME) values ('{x}', '{create_date}', '{create_time}')"
     cursor.execute(sql)
 
     connection.commit()
