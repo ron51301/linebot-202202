@@ -87,7 +87,7 @@ def index():
                         {
                             "type": "text",
                             "text": "Hello, user"
-                        }
+                        }]
                     # daka()
                     # payload["messages"] = [getPlayStickerMessage()]
 
