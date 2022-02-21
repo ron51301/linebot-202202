@@ -87,6 +87,29 @@ def index():
                     daka(x)
                     payload["messages"] = [getPlayStickerMessage()]
 
+                elif text == "打卡查詢":
+                    payload["messages"] = [
+                        {
+                            "type": "template",
+                            "altText": "This is a buttons template",
+                            "template": {
+                                "type": "buttons",
+                                "title": "打卡查詢",
+                                "text": "Please select time and date",
+                                "actions": [
+                                    {
+                                        "type": "datetimepicker",
+                                        "label": "Select date",
+                                        "data": "storeId=12345",
+                                        "mode": "datetime",
+                                        "initial": "2022-2-20t00:00",
+                                        "max": "2032-01-24t23:59",
+                                        "min": "2022-2-20t00:00"
+                                    }
+                                ]
+                            }
+                        }
+
                 elif text == "cfi-102":
                     x = 'cfi-102'
                     a = data(x)[0]
