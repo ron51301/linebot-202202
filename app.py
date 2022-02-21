@@ -100,13 +100,14 @@ def index():
                                         "type": "datetimepicker",
                                         "label": "Select date",
                                         "data": "storeId=12345",
-                                        "mode": "datetime"
+                                        "mode": "date"
                                     }
                                 ]
                             }
                         }
                     ]
 
+                    x = events[0]['params']['datetime']
                 elif text == "cfi-102":
                     x = 'cfi-102'
                     a = data(x)[0]
