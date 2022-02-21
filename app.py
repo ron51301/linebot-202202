@@ -89,7 +89,7 @@ def index():
 
                 elif text == "打卡查詢":
                     payload["messages"] = [
-                            message = {
+                        {
                             "type": "template",
                             "altText": "this is a template",
                             "template": {
