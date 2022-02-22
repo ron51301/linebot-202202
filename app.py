@@ -131,7 +131,11 @@ def index():
                     ]
                 elif text == "驗證":
                     x = events[0]['source']['userId']
-                    a = list(userIdVs())
+                    y = userIdVs()
+                    a = []
+                    for i in range(len(x)):
+                        b = list(x[i])
+                        a.append(b)
                     if x in a:
                         payload["messages"] = [
                             {
