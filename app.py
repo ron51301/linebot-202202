@@ -140,7 +140,7 @@ def index():
 
         elif events[0]["type"] == "postback":
             if "params" in events[0]["postback"]:
-                x = events[0]['params']['date']
+                x = events[0]["postback"]["params"]["date"]
                 a = showDakaSearch(x)[0][0]
                 b = showDakaSearch(x)[0][1]
                 c = showDakaSearch(x)[1][0]
