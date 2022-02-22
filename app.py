@@ -141,10 +141,11 @@ def index():
         elif events[0]["type"] == "postback":
             if "params" in events[0]["postback"]:
                 x = events[0]["postback"]["params"]["date"]
-                a = showDakaSearch(x)[0][0]
-                b = showDakaSearch(x)[0][1]
-                c = showDakaSearch(x)[1][0]
-                d = showDakaSearch(x)[1][1]
+                y = events[0]['source']['userId']
+                a = showDakaSearch(x, y)[0][0]
+                b = showDakaSearch(x, y)[0][1]
+                c = showDakaSearch(x, y)[1][0]
+                d = showDakaSearch(x, y)[1][1]
                 payload["messages"] = [
                     {
                         "type": "text",
@@ -256,7 +257,7 @@ def dakaSearch(): #打卡時間選擇
     return message
 
 
-def showDakaSearch(x):  # 打卡查詢功能
+def showDakaSearch(x, y):  # 打卡查詢功能
     connection = pymysql.connect(host="us-cdbr-east-05.cleardb.net",
                                  user="b809ff374c792c",
                                  password="bbc8de98",
@@ -267,7 +268,7 @@ def showDakaSearch(x):  # 打卡查詢功能
 
     sql = f"""select CREATE_DATE, CREATE_TIME 
                 from wlog
-                where CREATE_DATE ='{x}' and EMPNO = 'U7a43bde1fd66814a2cc1098bc8bbb0e8';
+                where CREATE_DATE ='{x}' and EMPNO = '{y}';
                 """
     cursor.execute(sql)
     result = cursor.fetchall()
