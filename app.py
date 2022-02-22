@@ -144,8 +144,8 @@ def index():
                 y = events[0]['source']['userId']
                 a = showDakaSearchFirst(x, y)[0][0]
                 b = showDakaSearchFirst(x, y)[0][1]
-                c = showDakaSearchlast(x, y)[1][0]
-                d = showDakaSearchlast(x, y)[1][1]
+                c = showDakaSearchlast(x, y)[0][0]
+                d = showDakaSearchlast(x, y)[0][1]
                 payload["messages"] = [
                     {
                         "type": "text",
