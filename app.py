@@ -88,26 +88,19 @@ def index():
                     payload["messages"] = [getPlayStickerMessage()]
 
                 elif text == "打卡查詢":
+                    payload["messages"] = [dakaSearch()]
+                    x = events[0]['params']['date']
+                    a = showDakaSearch(x)[0][0]
+                    b = showDakaSearch(x)[0][1]
+                    c = showDakaSearch(x)[1][0]
+                    d = showDakaSearch(x)[1][1]
                     payload["messages"] = [
                         {
-                            "type": "template",
-                            "altText": "this is a template",
-                            "template": {
-                                "type": "buttons",
-                                "text": "請選擇查詢時間",
-                                "actions": [
-                                    {
-                                        "type": "datetimepicker",
-                                        "label": "Select date",
-                                        "data": "storeId=12345",
-                                        "mode": "date"
-                                    }
-                                ]
-                            }
-                        }
-                    ]
+                            "type": "text",
+                            "text": f"{a+b}, {c+d}"
+                        }]
 
-                    # x = events[0]['params']['datetime']
+
                 elif text == "cfi-102":
                     x = 'cfi-102'
                     a = data(x)[0]
@@ -238,6 +231,46 @@ def data(x):  # 人流查詢功能
     cursor.close()
     connection.close()
 
+
+def dakaSearch(): #打卡時間選擇
+    message = {
+                "type": "template",
+                "altText": "this is a template",
+                "template": {
+                    "type": "buttons",
+                    "text": "請選擇查詢時間",
+                    "actions": [
+                        {
+                            "type": "datetimepicker",
+                            "label": "Select date",
+                            "data": "storeId=12345",
+                            "mode": "date"
+                        }
+                    ]
+                }
+            }
+    return message
+
+
+def showDakaSearch(x):  # 打卡查詢功能
+    connection = pymysql.connect(host="us-cdbr-east-05.cleardb.net",
+                                 user="b809ff374c792c",
+                                 password="bbc8de98",
+                                 database="heroku_9a97caadd884ab8")
+
+    cursor = connection.cursor()
+    # 在mysql中，時間資料也是字串，故create_date和create_time還要有一組雙引號
+
+    sql = f"""select CREATE_DATE, CREATE_TIME 
+                from wlog
+                where CREATE_DATE ='{x}' and EMPNO = 'U7a43bde1fd66814a2cc1098bc8bbb0e8';
+                """
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return result
 
 if __name__ == "__main__":
     app.debug = True
