@@ -142,14 +142,14 @@ def index():
             if "params" in events[0]["postback"]:
                 x = events[0]["postback"]["params"]["date"]
                 y = events[0]['source']['userId']
-                a = showDakaSearch(x, y)[0][0]
-                b = showDakaSearch(x, y)[0][1]
-                c = showDakaSearch(x, y)[1][0]
-                d = showDakaSearch(x, y)[1][1]
+                a = showDakaSearchFirst(x, y)[0][0]
+                b = showDakaSearchFirst(x, y)[0][1]
+                c = showDakaSearchlast(x, y)[1][0]
+                d = showDakaSearchlast(x, y)[1][1]
                 payload["messages"] = [
                     {
                         "type": "text",
-                        "text": f"{a} {b}, {c} {d}"
+                        "text": f"{a} {b}\n{c} {d}"
                     }]
 
                 replyMessage(payload)
@@ -257,7 +257,7 @@ def dakaSearch(): #打卡時間選擇
     return message
 
 
-def showDakaSearch(x, y):  # 打卡查詢功能
+def showDakaSearchFirst(x, y):  # 打卡查詢功能
     connection = pymysql.connect(host="us-cdbr-east-05.cleardb.net",
                                  user="b809ff374c792c",
                                  password="bbc8de98",
@@ -268,7 +268,9 @@ def showDakaSearch(x, y):  # 打卡查詢功能
 
     sql = f"""select CREATE_DATE, CREATE_TIME 
                 from wlog
-                where CREATE_DATE ='{x}' and EMPNO = '{y}';
+                where CREATE_DATE ='{x}' and EMPNO = '{y}'
+                order by CREATE_TIME 
+                limit 1;
                 """
     cursor.execute(sql)
     result = cursor.fetchall()
@@ -276,6 +278,30 @@ def showDakaSearch(x, y):  # 打卡查詢功能
     cursor.close()
     connection.close()
     return result
+
+
+def showDakaSearchlast(x, y):  # 打卡查詢功能
+    connection = pymysql.connect(host="us-cdbr-east-05.cleardb.net",
+                                 user="b809ff374c792c",
+                                 password="bbc8de98",
+                                 database="heroku_9a97caadd884ab8")
+
+    cursor = connection.cursor()
+    # 在mysql中，時間資料也是字串，故create_date和create_time還要有一組雙引號
+
+    sql = f"""select CREATE_DATE, CREATE_TIME 
+                from wlog
+                where CREATE_DATE ='{x}' and EMPNO = '{y}'
+                order by CREATE_TIME desc 
+                limit 1;
+                """
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return result
+
 
 if __name__ == "__main__":
     app.debug = True
