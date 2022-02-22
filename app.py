@@ -89,17 +89,6 @@ def index():
 
                 elif text == "打卡查詢":
                     payload["messages"] = [dakaSearch()]
-                    x = events[0]['params']['date']
-                    a = showDakaSearch(x)[0][0]
-                    b = showDakaSearch(x)[0][1]
-                    c = showDakaSearch(x)[1][0]
-                    d = showDakaSearch(x)[1][1]
-                    payload["messages"] = [
-                        {
-                            "type": "text",
-                            "text": f"{a+b}, {c+d}"
-                        }]
-
 
                 elif text == "cfi-102":
                     x = 'cfi-102'
@@ -149,6 +138,21 @@ def index():
                         ]
                 replyMessage(payload)
 
+        elif events[0]["type"] == "postback":
+            if "params" in events[0]["postback"]:
+                x = events[0]['params']['date']
+                a = showDakaSearch(x)[0][0]
+                b = showDakaSearch(x)[0][1]
+                c = showDakaSearch(x)[1][0]
+                d = showDakaSearch(x)[1][1]
+                payload["messages"] = [
+                    {
+                        "type": "text",
+                        "text": f"{a + b}, {c + d}"
+                    }]
+
+                replyMessage(payload)
+            
     return 'OK'
 
 def getPlayStickerMessage(): #標示打卡成功用的
