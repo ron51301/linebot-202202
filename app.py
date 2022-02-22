@@ -148,7 +148,7 @@ def index():
                 payload["messages"] = [
                     {
                         "type": "text",
-                        "text": f"{a + b}, {c + d}"
+                        "text": f"{a b}, {c d}"
                     }]
 
                 replyMessage(payload)
