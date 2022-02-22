@@ -133,8 +133,8 @@ def index():
                     x = events[0]['source']['userId']
                     y = userIdVs()
                     a = []
-                    for i in range(len(x)):
-                        b = list(x[i][0])
+                    for i in range(len(y)):
+                        b = list(y[i][0])
                         a.append(b)
                     if x in a:
                         payload["messages"] = [
@@ -326,7 +326,6 @@ def userIdVs():  # 打卡查詢功能
 
     cursor = connection.cursor()
     # 在mysql中，時間資料也是字串，故create_date和create_time還要有一組雙引號
-
     sql = f"""select distinct EMPNO
                 from wlog;
                 """
