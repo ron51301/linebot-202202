@@ -134,7 +134,7 @@ def index():
                     y = userIdVs()
                     a = []
                     for i in range(len(y)):
-                        b = list(y[i][0])
+                        b = y[i][0]
                         a.append(b)
                     if x in a:
                         payload["messages"] = [
