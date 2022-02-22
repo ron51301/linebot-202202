@@ -129,6 +129,17 @@ def index():
                                     f"人流量為{b}"
                         }
                     ]
+                elif text == "驗證":
+                    x = events[0]['source']['userId']
+                    a = list(userIdVs())
+                    if x in a:
+                        payload["messages"] = [
+                            {
+                                "type": "text",
+                                "text": "歡迎XX會員"
+                            }
+                        ]
+
                 else:
                     payload["messages"] = [
                             {
@@ -301,6 +312,28 @@ def showDakaSearchlast(x, y):  # 打卡查詢功能
     cursor.close()
     connection.close()
     return result
+
+
+def userIdVs():  # 打卡查詢功能
+    connection = pymysql.connect(host="us-cdbr-east-05.cleardb.net",
+                                 user="b809ff374c792c",
+                                 password="bbc8de98",
+                                 database="heroku_9a97caadd884ab8")
+
+    cursor = connection.cursor()
+    # 在mysql中，時間資料也是字串，故create_date和create_time還要有一組雙引號
+
+    sql = f"""select distinct EMPNO
+                from wlog;
+                """
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return result
+
+
 
 
 if __name__ == "__main__":
