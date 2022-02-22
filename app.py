@@ -130,7 +130,7 @@ def index():
                         }
                     ]
                 elif text == "驗證":
-                    x = events[0]['source']['userId']
+                    x = list(events[0]['source']['userId'])
                     y = userIdVs()
                     a = []
                     for i in range(len(x)):
