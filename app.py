@@ -343,7 +343,7 @@ def changeBot():
                 {
                     "type": "uri",
                     "label": "是",
-                    "uri": 'https://line.me/ti/p/@148focbn'
+                    "uri": 'https://line.me/ti/p/@202qizud'
                 },
                 {
                     "type": "message",
