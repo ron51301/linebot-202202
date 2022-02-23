@@ -137,13 +137,8 @@ def index():
                         b = y[i][0]
                         a.append(b)
                     if x in a:
-                        payload["messages"] = [
-                            {
-                                "type": "text",
-                                "text": "歡迎XX會員"
-                            }
-                        ]
-
+                        payload["messages"] = [changeBot()]
+                        
                 else:
                     payload["messages"] = [
                             {
@@ -337,7 +332,28 @@ def userIdVs():  # 打卡查詢功能
     return result
 
 
-
+def changeBot():
+    message = {
+        "type": "template",
+        "altText": "this is a confirm template",
+        "template": {
+            "type": "confirm",
+            "text": "請問是否要連接至員工工作區",
+            "actions": [
+                {
+                    "type": "uri",
+                    "label": "是",
+                    "uri": 'https://line.me/ti/p/@202qizud'
+                },
+                {
+                    "type": "message",
+                    "label": "否",
+                    "text": "否"
+                }
+            ]
+        }
+    }
+    return message
 
 if __name__ == "__main__":
     app.debug = True
